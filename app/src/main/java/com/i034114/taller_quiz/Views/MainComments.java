@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -32,11 +36,14 @@ public class MainComments extends AppCompatActivity {
     RecyclerView recyclerView;
     List<ModelsComments> CommentsList;
     AdaptersComments adaptersComments;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_comments);
+        toolbar = (Toolbar) findViewById(R.id.Toolbar3);
+        showToolbar(getResources().getString(R.string.PantallaComments));
 
         progressBar = (ProgressBar) findViewById(R.id.id_PantallaComments);
         recyclerView = (RecyclerView) findViewById(R.id.id_PantallaComments1);
@@ -46,6 +53,28 @@ public class MainComments extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
+    }
+
+    public void showToolbar(String I) {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(I);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menucomments, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
+        return super.onOptionsItemSelected(item);
+
     }
 
     public Boolean isOnLine(){

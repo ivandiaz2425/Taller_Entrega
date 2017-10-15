@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.i034114.taller_quiz.MainActivity;
 import com.i034114.taller_quiz.Models.ModelsComments;
 import com.i034114.taller_quiz.R;
 import com.i034114.taller_quiz.Views.MainComments;
@@ -72,7 +73,7 @@ public class AdaptersComments extends RecyclerView.Adapter<AdaptersComments.View
         @Override
         public void onClick(View view) {
             Context contextItem = view.getContext();
-            Intent intent = new Intent(context, MainComments.class);
+            Intent intent = new Intent(context, MainActivity.class);
             contextItem.startActivity(intent);
         }
     }

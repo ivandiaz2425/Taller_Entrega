@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -28,11 +31,18 @@ public class MainPosts extends AppCompatActivity {
     RecyclerView recyclerViewPhoto;
     List<ModelsPost> postList;
     AdaptersPost adaptersPost;
+    Toolbar toolbarp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_posts);
+        toolbarp = (Toolbar) findViewById(R.id.Toolbar2);
+        showToolbar(getResources().getString(R.string.PantallaPost));
+
+
+
         progressBarPhoto = (ProgressBar) findViewById(R.id.id_PantallaPosts);
         recyclerViewPhoto = (RecyclerView) findViewById(R.id.id_PantallaPosts1);
 
@@ -41,7 +51,29 @@ public class MainPosts extends AppCompatActivity {
         recyclerViewPhoto.setLayoutManager(linearLayoutManager);
 
         loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
+
     }
+
+    public void showToolbar(String i) {
+        setSupportActionBar(toolbarp);
+        getSupportActionBar().setTitle(i);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menupost, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public Boolean isOnLine(){
         // Hacer llamado al servicio de conectividad utilizando el ConnectivityManager

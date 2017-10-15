@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -29,12 +30,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<ModelsUsers> usersList;
     private AdaptersUsers adaptersUsers;
+    private Toolbar toolbar;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.Toolbar1);
+        showToolbar(getResources().getString(R.string.PantallaUsers));
 
         progressBar = (ProgressBar) findViewById(R.id.id_PantallaUser);
         recyclerView = (RecyclerView) findViewById(R.id.id_PantallaUser1);
@@ -42,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         loadData();
+    }
+
+
+    public void showToolbar(String i) {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuusers, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        loadData();
+        return super.onOptionsItemSelected(item);
     }
 
     public Boolean isOnLine(){
